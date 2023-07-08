@@ -1,0 +1,39 @@
+Server [localhost]:
+Database [postgres]:
+Port [5432]:
+Username [postgres]:
+Пароль пользователя postgres:
+psql (15.3)
+ПРЕДУПРЕЖДЕНИЕ: Кодовая страница консоли (866) отличается от основной
+                страницы Windows (1251).
+                8-битовые (русские) символы могут отображаться некорректно.
+                Подробнее об этом смотрите документацию psql, раздел
+                "Notes for Windows users".
+Введите "help", чтобы получить справку.
+
+postgres=# create table present(id serial primary key,present_name varchar not null,gift_to_whom varchar not null);
+CREATE TABLE
+postgres=# insert into present(present_name,gift_to_whom)values('car','father'),('flower','mother');
+INSERT 0 2
+postgres=# creat table who_gives(id serial primary key,who varchar not null,present_id references present(id));
+ОШИБКА:  ошибка синтаксиса (примерное положение: "creat")
+СТРОКА 1: creat table who_gives(id serial primary key,who varchar not ...
+          ^
+postgres=# create table who_gives(id serial primary key,who varchar not null,present_id references present(id));
+ОШИБКА:  ошибка синтаксиса (примерное положение: "references")
+СТРОКА 1: ...erial primary key,who varchar not null,present_id references...
+                                                               ^
+postgres=# create table who_gives(id serial primary key,who varchar not null,present_id int references present(id));
+CREATE TABLE
+postgres=# insert into who_gives(who,present_id)values('son',1),('daughter',2);
+INSERT 0 2
+                                                                       ^
+postgres=# create table country(id serial primary key,name varchar not null,population varchar not null,language varchar not null);
+CREATE TABLE
+postgres=# insert into country(name,population,language)values('Kyrgyzstan','7mln','kyrgyzcha'),('Usa','331mln','english'),('Russia','143mln','russian');
+INSERT 0 3
+postgres=# create table city(id serial primary key,name varchar not null,country_id int references country(id));
+CREATE TABLE
+postgres=# insert into city(name,country_id)values('Batken',1),('Moscow',3),('Chicago',2);
+INSERT 0 3
+postgres=#

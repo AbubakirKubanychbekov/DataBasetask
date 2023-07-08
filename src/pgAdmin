@@ -1,0 +1,21 @@
+create table animal(id serial primary key,
+				   name varchar not null,
+				   age int not null);
+insert into animal(name,age)
+values('Cat',3),('Cow',5),('Hourse',7);
+
+create table sport(id serial primary key,
+				  kind_of_sport varchar not null);
+insert into sport(kind_of_sport)values('soccer'),('basketball'),('hockey');
+
+create table athlete(id serial primary key,
+					full_name varchar not null,
+					sport_id int references sport(id));
+insert into athlete(full_name,sport_id)values('Lionel Messi',1),('James',2),('Александ Овечкин',3);
+
+create table famous_athlete(id serial primary key,
+							full_name varchar not null,
+							athlete_from varchar not null);
+insert into famous_athlete(full_name,athlete_from)
+values('Cristiano Ronaldo','Portugal'),
+('Manny Pacquia','Philipine'),('Busurmankul Abdibait','KYRGYZYSTAN');

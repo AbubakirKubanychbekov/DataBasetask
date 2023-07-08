@@ -1,0 +1,73 @@
+create table students
+(
+    id         serial primary key,
+    first_name varchar not null,
+    last_name  varchar not null,
+    age        int,
+    email      varchar unique
+);
+
+insert into students(first_name, last_name, age, email)
+values ('Abubakir', 'Kubanychbekov', 25, 'abubakir@gmail.com'),
+       ('Manas', 'Vaidullaev', 28, 'manas@gmail.com'),
+       ('Akylai', 'Musaeva', 21, 'akyla@gmail.com');
+
+create table groups
+(
+    id            serial primary key,
+    name          varchar not null,
+    date_of_start date,
+    students_id   int references students (id)
+);
+
+insert into groups(name, date_of_start, students_id)
+VALUES ('Java-10', '03-04-2023', 1),
+       ('Js-10', '05-04-2023', 2),
+       ('Java-9', '01-01-2023', 3);
+
+select *
+from groups;
+
+create table movie
+(
+    id            serial primary key,
+    movie_name    varchar not null,
+    movie_made_in varchar not null,
+    movie_year    date    not null,
+    director_id int references director(id)
+);
+
+insert into movie (movie_name, movie_made_in, movie_year,director_id)
+VALUES ('Avatar', 'Usa', '09-09-2009',1),
+       ('300 spartanies', 'Usa', '01-01-2010',3),
+       ('Kurmanjan datka','Kyrgyzstan','06-07-2016',2);
+
+
+create table director(id serial primary key,
+ first_name varchar not null ,
+ last_name varchar not null );
+
+insert into director(first_name, last_name)
+VALUES ('James','Cameroon'),
+       ('Sadyk','Sher Niyaz'),
+       ('Zack','Snaider');
+
+create table car(id serial primary key ,
+car_name varchar not null ,
+made varchar not null ,
+color varchar not null );
+
+insert into car(car_name, made, color)
+VALUES ('Rolls Royce','Usa','black'),
+       ('Lamborghini','Usa','Yellow'),
+       ('Ferrari','Italy','white');
+
+create table driver(id serial primary key ,
+name varchar not null ,
+driver_experience int not null ,
+car_id int references car(id));
+
+insert into driver(name, driver_experience,car_id)
+VALUES ('Abubakir',5,1),
+       ('Manas',8,2),
+       ('Kanjarbek',6,3);
